@@ -1,7 +1,10 @@
+import sys
 import click
 import importlib
 import pkgutil
 import os
+
+incase_args = sys.argv[2:]
 
 # Dictionary to store modules
 pkgs = {}
@@ -24,12 +27,13 @@ for finder, name, ispkg in pkgutil.walk_packages([currentDir]):
     if hasattr(pkg, "run"):
         pkgs[name[5:]] = pkg
 
+class CMD(click.Command):
+    def format_help(self, ctx, formatter):
+        ctx.invoke(run, name=incase_args[0], args=incase_args[1:])
 
 @click.group()
 def cli():
-    """Command line interface for managing tools."""
     pass
-
 
 @cli.command()
 def list():
@@ -38,11 +42,12 @@ def list():
         click.echo(f"{name}\t\t- {pkgs[name].run.__doc__.strip()}")
 
 
-@cli.command()
+@cli.command(cls=CMD)
 @click.argument(
     "name", type=click.STRING, shell_complete=lambda _, __, **kwargs: list(pkgs.keys())
 )
-def run(name):
+@click.argument("args", type=click.UNPROCESSED, nargs=-1)
+def run(name, args):
     """Run a specified tool by name."""
     if name not in pkgs:
         click.echo(f"Package {name} not found")
@@ -50,6 +55,10 @@ def run(name):
 
     # Get the package and call its 'run' function
     pkg = pkgs[name]
+
+    # pop first 2 of sys.argv
+    sys.argv = (name, *args)
+
     pkg.run()
 
 
