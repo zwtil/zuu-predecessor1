@@ -1,6 +1,7 @@
 import platform
 import psutil
 
+
 def run():
     # sysinfo
     # Operating System Information

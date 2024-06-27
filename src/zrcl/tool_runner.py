@@ -27,13 +27,16 @@ for finder, name, ispkg in pkgutil.walk_packages([currentDir]):
     if hasattr(pkg, "run"):
         pkgs[name[5:]] = pkg
 
+
 class CMD(click.Command):
     def format_help(self, ctx, formatter):
         ctx.invoke(run, name=incase_args[0], args=incase_args[1:])
 
+
 @click.group()
 def cli():
     pass
+
 
 @cli.command()
 def list():
