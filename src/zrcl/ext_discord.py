@@ -10,12 +10,14 @@ cache_var_literal = typing.Literal["no", "footer", "description"]
 
 class FooterDict(TypedDict):
     """A dictionary representing a footer in a Discord embed."""
+
     text: str
     icon_url: str
 
 
 class ImageDict(TypedDict):
     """A dictionary representing an image in a Discord embed."""
+
     url: str
     proxy_url: str
     height: int
@@ -24,6 +26,7 @@ class ImageDict(TypedDict):
 
 class ThumbnailDict(TypedDict):
     """A dictionary representing a thumbnail in a Discord embed."""
+
     url: str
     proxy_url: str
     height: int
@@ -32,6 +35,7 @@ class ThumbnailDict(TypedDict):
 
 class AuthorDict(TypedDict):
     """A dictionary representing an author in a Discord embed."""
+
     name: str
     url: str
     icon_url: str
@@ -39,6 +43,7 @@ class AuthorDict(TypedDict):
 
 class FieldDict(TypedDict):
     """A dictionary representing a field in a Discord embed."""
+
     name: str
     value: str
     inline: bool
@@ -46,6 +51,7 @@ class FieldDict(TypedDict):
 
 class EmbedDict(TypedDict, total=False):
     """A dictionary representing a Discord embed."""
+
     title: str
     description: str
     color: int
@@ -60,6 +66,7 @@ class EmbedDict(TypedDict, total=False):
 
 class EmbedFactoryMeta(TypedDict):
     """A dictionary representing metadata for an EmbedFactory."""
+
     locs: dict
     isformat: bool
     cache_var: str
@@ -178,6 +185,7 @@ class EmbedFactory:
         Returns:
             EmbedDict: The formatted embed dictionary.
         """
+
         # Recursively apply formatting to the dictionary based on locations of format strings.
         def apply_formatting(data: dict, locs: dict):
             for key, value in data.items():
