@@ -1,10 +1,12 @@
 import platform
 import psutil
-
+import os
 
 def run():
     # sysinfo
     # Operating System Information
+    print("CWD:", os.getcwd())
+
     print("Operating System:", platform.system())
     print("OS Version:", platform.version())
     print("OS Release:", platform.release())

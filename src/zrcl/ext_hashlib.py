@@ -3,7 +3,7 @@ import os
 from zrcl.ext_re import should_include
 
 
-def hash_file(path: str, algorithm: str = "sha256", chunk_size: int = 65536) -> str:
+def hash_file(path: str, algorithm: str = "sha256", chunk_size: int = 65536, normalize_newline: bool = True) -> str:
     """
     Computes the hash value of a file.
 
@@ -18,11 +18,13 @@ def hash_file(path: str, algorithm: str = "sha256", chunk_size: int = 65536) -> 
     hasher = hashlib.new(algorithm)
     with open(path, "rb") as f:
         for chunk in iter(lambda: f.read(chunk_size), b""):
+            if normalize_newline:
+                chunk = chunk.replace(b"\r\n", b"\n")
             hasher.update(chunk)
     return hasher.hexdigest()
 
 
-def hash_bytes(data: bytes, algorithm: str = "sha256") -> str:
+def hash_bytes(data: bytes, algorithm: str = "sha256", normalize_newline: bool = True) -> str:
     """
     Computes the hash value of a given byte string using the specified algorithm.
 
@@ -33,6 +35,8 @@ def hash_bytes(data: bytes, algorithm: str = "sha256") -> str:
     Returns:
         str: The computed hash value of the byte string in hexadecimal format.
     """
+    if normalize_newline:
+        data = data.replace(b"\r\n", b"\n")
     hasher = hashlib.new(algorithm)
     hasher.update(data)
     return hasher.hexdigest()
@@ -44,6 +48,7 @@ def hash_folder(
     chunk_size: int = 65536,
     include_file_masks: list = [],
     exclude_file_masks: list = [],
+    normalize_newline: bool = True,
 ) -> str:
     """
     Computes the hash value of all the files in a folder using the specified algorithm.
@@ -54,7 +59,7 @@ def hash_folder(
         chunk_size (int): The size of the chunks used to read the files. Defaults to 65536.
         include_file_masks (list): A list of file masks to include. Defaults to an empty list.
         exclude_file_masks (list): A list of file masks to exclude. Defaults to an empty list.
-
+        normalize_newline (bool): Whether to normalize newline characters. Defaults to True.
     Returns:
         str: The computed hash value of all the files in the folder.
     """
@@ -65,12 +70,14 @@ def hash_folder(
                 continue
             with open(os.path.join(root, file), "rb") as f:
                 for chunk in iter(lambda: f.read(chunk_size), b""):
+                    if normalize_newline:
+                        chunk = chunk.replace(b"\r\n", b"\n")
                     hasher.update(chunk)
     return hasher.hexdigest()
 
 
 def hash_python_directory(
-    directory: str, algorithm: str = "sha256", chunk_size: int = 65536
+    directory: str, algorithm: str = "sha256", chunk_size: int = 65536, normalize_newline: bool = True
 ) -> str:
     """
     Computes the hash value of all files in a given directory, skipping '__pycache__'
@@ -95,5 +102,7 @@ def hash_python_directory(
             file_path = os.path.join(root, file)
             with open(file_path, "rb") as f:
                 for chunk in iter(lambda: f.read(chunk_size), b""):
+                    if normalize_newline:
+                        chunk = chunk.replace(b"\r\n", b"\n")
                     hasher.update(chunk)
     return hasher.hexdigest()

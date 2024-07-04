@@ -1,7 +1,6 @@
 import sys
 import click
 import importlib
-import pkgutil
 import os
 
 incase_args = sys.argv[2:]
@@ -13,11 +12,13 @@ pkgs = {}
 currentDir = os.path.dirname(os.path.realpath(__file__))
 
 # Loop through all packages that start with 'tool_' in the current directory
-for finder, name, ispkg in pkgutil.walk_packages([currentDir]):
-    if not name.startswith("tool_"):
+for file in os.listdir(currentDir):
+    name = f"zrcl.{os.path.splitext(file)[0]}"
+
+    if not name.startswith("zrcl.tool_"):
         continue  # Skip packages that do not start with 'tool_'
 
-    if name == "tool_runner":
+    if name == "zrcl.tool_runner":
         continue
 
     # Import the module dynamically
@@ -25,8 +26,7 @@ for finder, name, ispkg in pkgutil.walk_packages([currentDir]):
 
     # Check if the module has a 'run' attribute, and add it to the dictionary if it does
     if hasattr(pkg, "run"):
-        pkgs[name[5:]] = pkg
-
+        pkgs[name[10:]] = pkg
 
 class CMD(click.Command):
     def format_help(self, ctx, formatter):

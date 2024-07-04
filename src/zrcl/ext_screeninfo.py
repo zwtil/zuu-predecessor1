@@ -108,3 +108,37 @@ def wnd_to_primary(wnd: gw.Window):
     """
     monitor = get_primary_monitor()
     wnd_to_monitor(wnd, monitor)
+
+
+def get_monitor_bounds(monitor_index):
+    """
+    Returns the bounds of the monitor specified by the index.
+
+    Args:
+        monitor_index (int): The index of the monitor to retrieve bounds from.
+
+    Returns:
+        tuple: A tuple containing the x-coordinate, y-coordinate, width, and height of the monitor.
+    """
+    monitors = screeninfo.get_monitors()
+    if monitor_index < 0 or monitor_index >= len(monitors):
+        raise ValueError("Invalid monitor index")
+    monitor = monitors[monitor_index]
+    return (monitor.x, monitor.y, monitor.x + monitor.width, monitor.y + monitor.height)
+
+
+def get_monitor_center(monitor_index):
+    """
+    Returns the center of the monitor specified by the index.
+
+    Args:
+        monitor_index (int): The index of the monitor to retrieve center from.
+
+    Returns:
+        tuple: A tuple containing the x-coordinate and y-coordinate of the monitor's center.
+    """
+    monitors = screeninfo.get_monitors()
+    if monitor_index < 0 or monitor_index >= len(monitors):
+        raise ValueError("Invalid monitor index")
+    monitor = monitors[monitor_index]
+    return (monitor.x + monitor.width / 2, monitor.y + monitor.height / 2)
