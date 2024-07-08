@@ -1,3 +1,5 @@
+[![Upload Python Package](https://github.com/ZackaryW/zrcl2/actions/workflows/python-publish.yml/badge.svg)](https://github.com/ZackaryW/zrcl2/actions/workflows/python-publish.yml)
+
 # zrcl
 zack's reusable common library
 
