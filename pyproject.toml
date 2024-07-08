@@ -5,12 +5,14 @@ description = "Add your description here"
 authors = [
     { name = "ZackaryW", email = "36378555+ZackaryW@users.noreply.github.com" }
 ]
-dependencies = []
+dependencies = [
+    "requests>=2.32.3",
+]
 readme = "README.md"
 requires-python = ">= 3.8"
 
 [project.optional-dependencies]
-all = [
+req = [
     "pygetwindow>=0.0.9",
     "pywin32>=306",
     "pyscreeze>=0.1.30",
@@ -56,6 +58,7 @@ dev-dependencies = [
     "numpy<2",
     "easyocr>=1.7.1",
     "thefuzz>=0.22.1",
+    "orjson>=3.10.6",
 ]
 
 [tool.hatch.metadata]

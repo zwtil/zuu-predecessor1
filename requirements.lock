@@ -7,5 +7,16 @@
 #   all-features: false
 #   with-sources: false
 #   generate-hashes: false
+#   universal: false
 
 -e file:.
+certifi==2024.7.4
+    # via requests
+charset-normalizer==3.3.2
+    # via requests
+idna==3.7
+    # via requests
+requests==2.32.3
+    # via zrcl
+urllib3==2.2.2
+    # via requests

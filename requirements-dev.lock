@@ -7,6 +7,7 @@
 #   all-features: false
 #   with-sources: false
 #   generate-hashes: false
+#   universal: false
 
 -e file:.
 aiohttp==3.9.5
@@ -16,7 +17,7 @@ aiosignal==1.3.1
 attrs==23.2.0
     # via aiohttp
 black==24.4.2
-certifi==2024.6.2
+certifi==2024.7.4
     # via requests
 cffi==1.16.0
     # via cryptography
@@ -91,6 +92,7 @@ numpy==1.26.4
     # via torchvision
 opencv-python-headless==4.10.0.84
     # via easyocr
+orjson==3.10.6
 packaging==24.1
     # via black
     # via lazy-loader
@@ -133,9 +135,10 @@ pywin32-ctypes==0.2.2
     # via keyring
 pyyaml==6.0.1
     # via easyocr
-rapidfuzz==3.9.3
+rapidfuzz==3.9.4
     # via thefuzz
 requests==2.32.3
+    # via zrcl
 scikit-image==0.24.0
     # via easyocr
 scipy==1.14.0
@@ -151,7 +154,7 @@ sympy==1.12.1
 tbb==2021.13.0
     # via mkl
 thefuzz==0.22.1
-tifffile==2024.6.18
+tifffile==2024.7.2
     # via scikit-image
 toml==0.10.2
 torch==2.3.1
