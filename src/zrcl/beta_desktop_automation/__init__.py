@@ -1,8 +1,8 @@
-
 from contextlib import contextmanager
 import logging
 from zrcl.beta_desktop_automation.feature_cropper import FeatureCropper
 import time
+
 
 def waitFor(token: FeatureCropper, timeout: float = 10.0, interval: float = 1.1):
     """

@@ -99,9 +99,7 @@ class RegionMarker:
         return cls(allscreens=True)
 
     @classmethod
-    def from_window(
-        cls, window: gw.Window, region: Optional[RegionSpec] = None
-    ):
+    def from_window(cls, window: gw.Window, region: Optional[RegionSpec] = None):
         """
         Returns a RegionMarker associated with the given window.
 
@@ -110,9 +108,7 @@ class RegionMarker:
         return cls(window=window, region=region if region else RegionSpec.full())
 
     @classmethod
-    def from_monitor(
-        cls, monitor_num: int, region: Optional[RegionSpec] = None
-    ):
+    def from_monitor(cls, monitor_num: int, region: Optional[RegionSpec] = None):
         """
         Returns a RegionMarker associated with the given monitor.
 
@@ -127,7 +123,6 @@ class RegionMarker:
         self.__screenshotted = False
         self.__monitor_num_mirror = self.monitor_num
         self.__window_coords_mirror = None
-
 
     @property
     def screenshot(self):

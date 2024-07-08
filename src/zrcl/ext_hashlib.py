@@ -3,7 +3,12 @@ import os
 from zrcl.ext_re import should_include
 
 
-def hash_file(path: str, algorithm: str = "sha256", chunk_size: int = 65536, normalize_newline: bool = True) -> str:
+def hash_file(
+    path: str,
+    algorithm: str = "sha256",
+    chunk_size: int = 65536,
+    normalize_newline: bool = True,
+) -> str:
     """
     Computes the hash value of a file.
 
@@ -24,7 +29,9 @@ def hash_file(path: str, algorithm: str = "sha256", chunk_size: int = 65536, nor
     return hasher.hexdigest()
 
 
-def hash_bytes(data: bytes, algorithm: str = "sha256", normalize_newline: bool = True) -> str:
+def hash_bytes(
+    data: bytes, algorithm: str = "sha256", normalize_newline: bool = True
+) -> str:
     """
     Computes the hash value of a given byte string using the specified algorithm.
 
@@ -77,7 +84,10 @@ def hash_folder(
 
 
 def hash_python_directory(
-    directory: str, algorithm: str = "sha256", chunk_size: int = 65536, normalize_newline: bool = True
+    directory: str,
+    algorithm: str = "sha256",
+    chunk_size: int = 65536,
+    normalize_newline: bool = True,
 ) -> str:
     """
     Computes the hash value of all files in a given directory, skipping '__pycache__'

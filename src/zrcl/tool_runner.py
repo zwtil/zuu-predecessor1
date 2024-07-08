@@ -28,6 +28,7 @@ for file in os.listdir(currentDir):
     if hasattr(pkg, "run"):
         pkgs[name[10:]] = pkg
 
+
 class CMD(click.Command):
     def format_help(self, ctx, formatter):
         ctx.invoke(run, name=incase_args[0], args=incase_args[1:])
