@@ -6,6 +6,23 @@ zack's reusable common library
 * package does not install any dependencies by default, it is up to the user to install them
 * all functions are properly type hinted and docstringed
 
+## Install
+stable
+```bash
+pip install zrcl
+```
+
+or
+```bash
+pip install git+https://github.com/ZackaryW/zrcl2.git
+```
+
+beta
+> branch using beta
+```bash
+pip install git+https://github.com/ZackaryW/zrcl2.git@beta
+```
+
 ## Project Structure
 * `beta_` means this is not finalized and not properly tested
 * `ext_` means this is an extension to the original package (util functions for qol)
@@ -15,3 +32,4 @@ if exclusively specified as `app_win_` or `app_linux_` or `app_mac_` then it is 
 
 ## Additional
 * `zrcl` command is available and can be used to pass command and parameters for other tools
+
