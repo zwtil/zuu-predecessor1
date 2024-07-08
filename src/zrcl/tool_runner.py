@@ -43,15 +43,18 @@ def cli():
 def list():
     """List all available tools."""
     for name in pkgs.keys():
-        click.echo(f"{name}\t\t- {pkgs[name].run.__doc__.strip()}")
+        try:
+            click.echo(f"{name}\t\t- {pkgs[name].run.__doc__.strip()}")
+        except AttributeError:
+            click.echo(f"{name}\t\t- (No description provided)")
 
 
-@cli.command(cls=CMD)
+@cli.command("run",cls=CMD)
 @click.argument(
     "name", type=click.STRING, shell_complete=lambda _, __, **kwargs: list(pkgs.keys())
 )
 @click.argument("args", type=click.UNPROCESSED, nargs=-1)
-def run(name, args):
+def _run(name, args):
     """Run a specified tool by name."""
     if name not in pkgs:
         click.echo(f"Package {name} not found")
@@ -65,6 +68,8 @@ def run(name, args):
 
     pkg.run()
 
+def run():
+    cli()
 
 if __name__ == "__main__":
     cli()

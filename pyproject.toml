@@ -48,3 +48,6 @@ packages = ["src/zrcl"]
 
 [tool.ruff]
 ignore = ["F401"]
+
+[project.scripts]
+zrcl = "zrcl.tool_runner:run"
