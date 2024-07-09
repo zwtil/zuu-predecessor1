@@ -35,5 +35,5 @@ def pandoc_generate_file_from_data(
     create_yaml_properties(os.path.join(os.getcwd(), "input.md"), data)
     
     os.system(
-        f"pandoc input.md -o {outname} -f markdown -t {outtype} --template='{template}'"
+        f'pandoc input.md -o {outname} -f markdown -t {outtype} --template="{template}"'
     )
