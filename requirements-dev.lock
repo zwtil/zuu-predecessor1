@@ -76,7 +76,6 @@ more-itertools==10.3.0
 mouseinfo==0.1.3
     # via pyautogui
 moviepy==1.0.3
-    # via zrcl
 mpmath==1.3.0
     # via sympy
 multidict==6.0.5
@@ -150,7 +149,6 @@ rapidfuzz==3.9.4
     # via thefuzz
 requests==2.32.3
     # via moviepy
-    # via zrcl
 scikit-image==0.24.0
     # via easyocr
 scipy==1.14.0
