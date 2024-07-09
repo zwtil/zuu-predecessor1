@@ -32,7 +32,7 @@ def pandoc_generate_file_from_data(
     Note:
         The function assumes that the `pandoc` command is available in the system's PATH.
     """
-    create_yaml_properties(os.getcwd(), data)
+    create_yaml_properties(os.path.join(os.getcwd(), "input.md"), data)
     
     os.system(
         f"pandoc input.md -o {outname} -f markdown -t {outtype} --template='{template}'"
