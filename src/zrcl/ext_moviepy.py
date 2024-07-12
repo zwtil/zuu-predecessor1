@@ -66,5 +66,6 @@ def thumbnail_folder(
     """
     for file in os.listdir(path):
         if os.path.splitext(file)[1] in supported_formats:
-            yield make_thumbnail(os.path.join(path, file), sec), os.path.join(path, file)
-
+            yield make_thumbnail(os.path.join(path, file), sec), os.path.join(
+                path, file
+            )

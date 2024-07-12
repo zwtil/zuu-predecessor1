@@ -49,7 +49,7 @@ def list():
             click.echo(f"{name}\t\t- (No description provided)")
 
 
-@cli.command("run",cls=CMD)
+@cli.command("run", cls=CMD)
 @click.argument(
     "name", type=click.STRING, shell_complete=lambda _, __, **kwargs: list(pkgs.keys())
 )
@@ -68,8 +68,10 @@ def _run(name, args):
 
     pkg.run()
 
+
 def run():
     cli()
+
 
 if __name__ == "__main__":
     cli()

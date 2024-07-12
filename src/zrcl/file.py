@@ -222,6 +222,7 @@ class FileProperty:
 
         return content
 
+
 # ANCHOR change monitor
 class FolderWatcher:
     """
@@ -230,14 +231,15 @@ class FolderWatcher:
     This class allows you to watch a folder and its subfolders for changes to files.
     It provides a mechanism to detect when a file has been created, modified, or deleted.
     """
-    def __init__(self, path : str, deep : bool = False, detailed : bool = False):
+
+    def __init__(self, path: str, deep: bool = False, detailed: bool = False):
         self.path = path
         self.deep = deep
         self.detailed = detailed
         self.watched = {}
         self.changed = {}
         self.snapshot()
-        
+
     def snapshot(self):
         """
         Snapshot the directory and its subdirectories to keep track of file changes.
@@ -267,7 +269,7 @@ class FolderWatcher:
                             stats = {
                                 "mdate": os.path.getmtime(full_path),
                                 "size": os.path.getsize(full_path),
-                                "isdir": is_dir
+                                "isdir": is_dir,
                             }
                             if self.detailed:
                                 # Add detailed stats if required
@@ -283,7 +285,7 @@ class FolderWatcher:
                         stats = {
                             "mdate": os.path.getmtime(full_path),
                             "size": os.path.getsize(full_path),
-                            "isdir": is_dir
+                            "isdir": is_dir,
                         }
                         if self.detailed:
                             # Add detailed stats if required
@@ -294,7 +296,6 @@ class FolderWatcher:
 
         except Exception as e:
             print(f"Failed to snapshot directory {self.path}: {str(e)}")
-
 
     def track_changes(self):
         """
@@ -320,13 +321,14 @@ class FolderWatcher:
         for k, v in old_watched.items():
             if not os.path.exists(k):
                 self.changed[k] = "deleted"
-            elif v and (os.path.getmtime(k) != v["mdate"] or os.path.getsize(k) != v["size"]):
+            elif v and (
+                os.path.getmtime(k) != v["mdate"] or os.path.getsize(k) != v["size"]
+            ):
                 self.changed[k] = "modified"
 
         newlycreated = set(self.watched) - set(old_watched)
         for k in newlycreated:
             self.changed[k] = "created"
-
 
     @contextmanager
     def watch(self):
@@ -348,7 +350,7 @@ class FolderWatcher:
             if v == "created":
                 created.append(k)
         return created
-    
+
     @property
     def deleted(self):
         """
@@ -359,7 +361,7 @@ class FolderWatcher:
             if v == "deleted":
                 deleted.append(k)
         return deleted
-    
+
     @property
     def modified(self):
         """
@@ -370,5 +372,3 @@ class FolderWatcher:
             if v == "modified":
                 modified.append(k)
         return modified
-            
-    
