@@ -1,7 +1,7 @@
 #
 [project]
 name = "zrcl"
-version = "0.4.3"
+version = "0.4.4"
 description = "Zack's common reusable library"
 authors = [
     { name = "ZackaryW", email = "36378555+ZackaryW@users.noreply.github.com" }
