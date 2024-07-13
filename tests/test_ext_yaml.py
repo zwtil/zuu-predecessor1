@@ -1,4 +1,9 @@
+import pprint
 import time
+
+from zrcl.ext_yaml import FloYaml
+
+
 
 def test_floyaml_1():
     from zrcl.ext_yaml import FloYaml
@@ -71,6 +76,52 @@ def test_floyaml_1():
     """
     assert parsed["val2", "val3[1]"] == {"__val__": 4, "val5": 5}
 
-    dumped = FloYaml.dumps(parsed)
+    dumped = parsed.dumps()
     dumped = dumped.splitlines()
-    pass
+
+def test_floyaml_2():
+    data = """\
+task: operation-alpha
+  time_start: 13:00
+  time_limit: 60min
+  action: initiate-alpha
+    execute: ${path_generic}/exec_cmd alpha --target ${target_alpha}
+
+  on_completion: cleanup-alpha
+    terminate_all: True
+
+task: operation-beta
+  time_start: 14:00
+  time_limit: 60min
+  action: initiate-beta
+    execute: ${path_generic}/exec_cmd beta {param_beta}
+    wait: 1min
+
+  on_completion: cleanup-beta
+    terminate_all: True
+
+task: operation-gamma
+  time_start: 15:00
+  time_limit: 60min
+  action: initiate-gamma
+    execute: ${path_generic}/exec_cmd gamma {param_gamma}
+      
+  on_completion: cleanup-gamma
+    terminate_all: True
+
+process: procedure-delta
+  boundary: all
+  frequency: 5min
+
+procedure: process-epsilon
+  trigger: ${path_generic}/exec_cmd epsilon
+    run: ${path_generic}/exec_cmd kill --name ${name_epsilon}
+
+procedure: process-zeta
+  trigger: ${path_generic}/exec_cmd zeta-launch
+    run: ${path_generic}/exec_cmd launch --name ${name_zeta} --package ${pkg_zeta}
+
+    """
+    processed = FloYaml(data)
+
+    pprint.pprint(processed.datadict)
