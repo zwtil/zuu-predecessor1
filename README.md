@@ -1,3 +1,5 @@
+this project is archived in favor of https://github.com/ZackaryW/zuu (better name, better structure)
+
 [![Upload Python Package](https://github.com/ZackaryW/zrcl2/actions/workflows/python-publish.yml/badge.svg)](https://github.com/ZackaryW/zrcl2/actions/workflows/python-publish.yml)
 
 # zrcl
